@@ -9,7 +9,7 @@ CREATE OR REPLACE TEMPORARY VIEW baggage_data_transformed AS
     ROW_NUMBER() OVER (PARTITION BY bag_id ORDER BY event_time DESC) AS rn
   FROM live.baggage_events;
   
-CREATE OR REPLACE LIVE TABLE gshen_catalog.yvr_airport.bag_status AS
+CREATE OR REPLACE LIVE TABLE gshen_catalog.yvr_airport.bag_status_new AS
   SELECT 
     bag_id,
     passenger_id,
@@ -20,7 +20,7 @@ CREATE OR REPLACE LIVE TABLE gshen_catalog.yvr_airport.bag_status AS
   FROM live.baggage_data_transformed
   where rn = 1;
 
-CREATE OR REPLACE LIVE TABLE gshen_catalog.yvr_airport.bag_weight_aggregate AS
+CREATE OR REPLACE LIVE TABLE gshen_catalog.yvr_airport.bag_weight_aggregate_new AS
   SELECT 
     weight_kg,
     COUNT(*) AS bag_count,

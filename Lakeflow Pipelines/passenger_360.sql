@@ -1,4 +1,4 @@
-CREATE LIVE TABLE gshen_eia_catalog.eia_gold.passenger_360 AS
+CREATE LIVE TABLE gshen_catalog.yvr_airport.passenger_360 AS
 SELECT
   p.passenger_id,
   p.name,
@@ -19,7 +19,7 @@ FROM
       ON p.flight_id = f.flight_id
     INNER JOIN live.gate_assignments g
       ON p.flight_id = g.flight_id
-    INNER JOIN gshen_eia_catalog.eia_gold.bag_status b
+    INNER JOIN gshen_catalog.yvr_airport.bag_status b
       on p.passenger_id = b.passenger_id
 
 
